@@ -17,7 +17,6 @@ app.use(cors());
 app.use(express.json());
 app.use('/', router);
 
-
 const start = async () => {
     try {
         await sequelize.authenticate();

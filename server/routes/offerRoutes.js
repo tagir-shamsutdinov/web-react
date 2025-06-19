@@ -3,6 +3,6 @@ import { getAllOffers } from "../controllers/offerController.js";
 
 const router = new Router();
 
-router.get('/offers', getAllOffers);
+router.get('/', getAllOffers);
 
 export default router;

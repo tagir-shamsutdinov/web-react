@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function NotFound() {
+function NotFoundPage() {
     return (
         <div>
             <h1>404</h1>
@@ -11,4 +11,4 @@ function NotFound() {
     );
 }
 
-export { NotFound };
+export { NotFoundPage };

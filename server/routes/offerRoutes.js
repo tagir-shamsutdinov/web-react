@@ -1,28 +1,33 @@
-import { Router } from 'express';
+import { Router } from "express";
 import {
-    createOffer,
-    getAllOffers,
-    getFavouriteOffers,
-    getFullOffer,
-    toggleFavorite
+  createOffer,
+  getAllOffers,
+  getFullOffer,
+  getFavoriteOffers,
+  toggleFavorite,
 } from "../controllers/offerController.js";
 import upload from "../middleware/upload.js";
-import {authenticateToken} from "../middleware/authModdleware.js";
+import { authenticateToken } from "../middleware/authMiddleware.js";
 
-const router = new Router();
+const offerRouter = new Router();
 
-router.get('/offers', getAllOffers);
+offerRouter.post(
+  "/favorite/:offerId/:status",
+  authenticateToken,
+  toggleFavorite
+);
+offerRouter.get("/favorite", getFavoriteOffers);
 
-router.get('/offers/:id', getFullOffer);
+offerRouter.get("/offers", getAllOffers);
+offerRouter.post(
+  "/offers",
+  upload.fields([
+    { name: "previewImage", maxCount: 1 },
+    { name: "photos", maxCount: 6 },
+  ]),
+  createOffer
+);
 
-router.post('/offers', upload.fields([
-        { name: 'previewImage', maxCount: 1 },
-        { name: 'photos', maxCount: 6 }
-    ]), createOffer);
+offerRouter.get("/offers/:id", getFullOffer);
 
-router.get('/favorite', getFavouriteOffers);
-
-router.post('/favorite/:offerId/:status', authenticateToken, toggleFavorite);
-
-
-export default router;
+export default offerRouter;

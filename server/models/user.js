@@ -1,46 +1,44 @@
-import { Model, DataTypes } from 'sequelize';
-import sequelize from '../config/database.js';
-
+import { Model, DataTypes } from "sequelize";
+import sequelize from "../config/database.js";
 
 class User extends Model {}
 
-
-User.init({
+User.init(
+  {
     username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            len: [1, 15]
-        }
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1, 15],
+      },
     },
     email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-        validate: {
-            isEmail: true
-        }
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true,
+      },
     },
     password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-
-
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     userType: {
-        type: DataTypes.ENUM,
-        values: ['normal', 'pro'],
-        allowNull: false
+      type: DataTypes.ENUM,
+      values: ["normal", "pro"],
+      allowNull: false,
     },
     avatar: {
-        type: DataTypes.STRING,
-        allowNull: true
-    }
-}, {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+  },
+  {
     sequelize,
-    modelName: 'User',
-    tableName: 'users',
-});
+    modelName: "User",
+    tableName: "users",
+  }
+);
 
-
-export {User};
+export { User };

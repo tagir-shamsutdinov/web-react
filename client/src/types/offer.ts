@@ -1,7 +1,7 @@
 import { SortOffer } from "./sort";
 import { SortOffersType } from "../const";
 
-type OfferLocation = {
+export type Location = {
   latitude: number;
   longitude: number;
   zoom: number;
@@ -9,7 +9,7 @@ type OfferLocation = {
 
 export type CityOffer = {
   name: string;
-  location: OfferLocation;
+  location: Location;
 };
 
 type HostOffer = {
@@ -24,7 +24,7 @@ export type FullOffer = {
   type: string;
   price: number;
   city: CityOffer;
-  location: OfferLocation;
+  location: Location;
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
@@ -42,7 +42,7 @@ export type OffersList = {
   type: string;
   price: number;
   city: CityOffer;
-  location: OfferLocation;
+  location: Location;
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
@@ -76,11 +76,11 @@ export function sortOffersByType(
   type: SortOffer
 ): OffersList[] {
   switch (type) {
-    case SortOffersType.PriceToHigh:
+    case SortOffersType.PriceToHigh as SortOffer:
       return offers.sort((a, b) => a.price - b.price);
-    case SortOffersType.PriceToLow:
+    case SortOffersType.PriceToLow as SortOffer:
       return offers.sort((a, b) => b.price - a.price);
-    case SortOffersType.TopRated:
+    case SortOffersType.TopRated as SortOffer:
       return offers.sort((a, b) => b.rating - a.rating);
     default:
       return offers;

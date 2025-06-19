@@ -1,18 +1,21 @@
-import React, { StrictMode } from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './components/app/app';
-import { offers } from './mocks/offers';
-import {offersList} from "./mocks/offers-list";
-import {mockReviews} from "./mocks/reviews";
-import {Provider} from "react-redux";
-import {store} from "./store";
+import { Provider } from 'react-redux';
+import { store } from './store';
+import { checkAuthAction, fetchOffersAction } from './store/api-actions';
+import { ErrorMessage } from './components/error-message/error-message';
 
 const root = createRoot(document.getElementById('root')!);
 
+store.dispatch(checkAuthAction());
+store.dispatch(fetchOffersAction());
+
 root.render(
-    <StrictMode>
-        <Provider store={store}>
-            <App rentalOffersCount={offersList.length} offers={offers} offersList={ offersList } reviews={ mockReviews } />
-        </Provider>
-    </StrictMode>
+  <React.StrictMode>
+    <Provider store={store}>
+      <ErrorMessage />
+      <App />
+    </Provider>
+  </React.StrictMode>
 );

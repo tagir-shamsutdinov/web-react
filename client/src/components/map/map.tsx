@@ -25,7 +25,7 @@ const CityMap: React.FC<MapProps> = ({
   points,
   hoveredMarkerId,
 }) => {
-  const mapRef = useRef<MapContainer>(null);
+  const mapRef = useRef<L.Map>(null); // Исправлено на L.Map
 
   const greenIcon = new L.Icon({
     iconUrl:
